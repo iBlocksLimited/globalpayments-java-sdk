@@ -5,6 +5,7 @@ import com.global.api.entities.enums.IStringConstant;
 
 import java.math.BigDecimal;
 import java.text.NumberFormat;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -32,9 +33,11 @@ public class StringUtils {
         if(amount == null)
             return "";
 
-        NumberFormat fmt = NumberFormat.getCurrencyInstance();
+        // Depending on the default locale is horrible
+        NumberFormat fmt = NumberFormat.getCurrencyInstance(Locale.UK);
         String currency = fmt.format(amount);
-        return currency.replaceAll("[^0-9]", "");
+        // Strip leading 0s
+        return String.valueOf(Integer.parseInt(currency.replaceAll("[^0-9]", "")));
     }
 
     public static String join(String separator, Object[] fields) {
