@@ -388,8 +388,7 @@ public class RealexConnector extends XmlGateway implements IPaymentGateway, IRec
         request.set("CARD_PAYMENT_BUTTON", hostedPaymentConfig.getPaymentButtonText());
         if(hostedPaymentConfig.isCardStorageEnabled() != null)
             request.set("CARD_STORAGE_ENABLE", hostedPaymentConfig.isCardStorageEnabled() ? "1" : "0");
-        if (builder.getTransactionType() == TransactionType.Verify)
-            request.set("VALIDATE_CARD_ONLY", builder.getTransactionType() == TransactionType.Verify ? "1" : "0");
+        request.set("VALIDATE_CARD_ONLY", builder.getTransactionType() == TransactionType.Verify ? "1" : "0");
         if(!hostedPaymentConfig.getFraudFilterMode().equals(FraudFilterMode.None))
             request.set("HPP_FRAUDFILTER_MODE", hostedPaymentConfig.getFraudFilterMode());
         if(builder.getRecurringType() != null || builder.getRecurringSequence() != null) {
